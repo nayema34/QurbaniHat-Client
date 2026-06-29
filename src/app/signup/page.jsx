@@ -10,7 +10,6 @@ export default function Signup() {
     name: '',
     email: '',
     password: '',
-    phone: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -25,7 +24,6 @@ export default function Signup() {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        phone: formData.phone,
       });
 
       if (authError) {
@@ -46,7 +44,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-zinc-950 flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-emerald-900 to-zinc-950 flex items-center justify-center px-6 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-white">Create Account</h1>
@@ -85,17 +83,7 @@ export default function Signup() {
               />
             </div>
 
-            <div>
-              <label className="block text-sm text-zinc-400 mb-2">Phone Number</label>
-              <input
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-emerald-500 text-white"
-                placeholder="+880 1XXX-XXXXXX"
-              />
-            </div>
+            
 
             <div>
               <label className="block text-sm text-zinc-400 mb-2">Password</label>
