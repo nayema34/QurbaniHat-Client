@@ -5,7 +5,7 @@ import { ThunderboltFill , CircleCheckFill} from '@gravity-ui/icons';
 
 const Banner = () => {
   return (
-    <section className="relative w-full min-h-screen flex items-center bg-gradient-to-br from-emerald-950 via-emerald-900 to-zinc-950 text-white py-24 px-6 md:px-12 overflow-hidden">
+    <section className="relative w-full min-h-screen flex items-center bg-linear-to-br from-emerald-950 via-emerald-900 to-zinc-950 text-white py-24 px-6 md:px-12 overflow-hidden">
       <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
       
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
@@ -17,7 +17,7 @@ const Banner = () => {
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05]">
             Qurbani Animals,<br />
-            <span className="bg-gradient-to-r from-amber-300 to-amber-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-amber-300 to-amber-400 bg-clip-text text-transparent">
               Delivered with Trust
             </span>
           </h1>
@@ -61,7 +61,7 @@ const Banner = () => {
         </div>
 
         <div className="hidden lg:flex justify-center relative">
-          <div className="absolute -inset-10 bg-gradient-to-tr from-amber-400/10 via-emerald-400/10 to-transparent rounded-[4rem] blur-3xl"></div>
+          <div className="absolute -inset-10 bg-linear-to-tr from-amber-400/10 via-emerald-400/10 to-transparent rounded-[4rem] blur-3xl"></div>
           
           <div className="relative bg-zinc-900/70 border border-zinc-700/70 backdrop-blur-xl rounded-3xl p-8 shadow-2xl w-full max-w-md">
             <div className="flex items-center justify-between mb-6">

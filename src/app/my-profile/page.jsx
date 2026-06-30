@@ -47,7 +47,7 @@ export default function MyProfilePage() {
         
         <div className="bg-white rounded-3xl shadow-xl border border-zinc-200/60 overflow-hidden">
           
-          <div className="h-32 bg-gradient-to-r from-emerald-600 to-emerald-700 px-8 flex items-end">
+          <div className="h-32 bg-linear-to-r from-emerald-600 to-emerald-700 px-8 flex items-end">
             <div className="transform translate-y-6 flex items-center space-x-4">
               <div className="w-20 h-20 rounded-2xl bg-amber-500 flex items-center justify-center border-4 border-white text-white shadow-md">
                 <MdAccountCircle className="text-5xl" />
@@ -62,7 +62,7 @@ export default function MyProfilePage() {
           <div className="pt-12 p-8 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-zinc-50 rounded-2xl p-4 border border-zinc-200/60 flex items-center space-x-3">
-                <MdBadge className="text-emerald-600 text-2xl flex-shrink-0" />
+                <MdBadge className="text-emerald-600 text-2xl shrink-0" />
                 <div>
                   <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider block">Full Name</span>
                   <span className="text-sm font-semibold text-zinc-700">{user?.name || 'N/A'}</span>
@@ -70,7 +70,7 @@ export default function MyProfilePage() {
               </div>
 
               <div className="bg-zinc-50 rounded-2xl p-4 border border-zinc-200/60 flex items-center space-x-3">
-                <MdEmail className="text-emerald-600 text-2xl flex-shrink-0" />
+                <MdEmail className="text-emerald-600 text-2xl shrink-0" />
                 <div className="overflow-hidden">
                   <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider block">Email Workspace Address</span>
                   <span className="text-sm font-semibold text-zinc-700 block truncate">{user?.email}</span>
