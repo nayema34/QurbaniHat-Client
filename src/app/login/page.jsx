@@ -55,7 +55,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-zinc-950 flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-emerald-900 to-zinc-950 flex items-center justify-center px-6 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-white">Welcome Back</h1>
