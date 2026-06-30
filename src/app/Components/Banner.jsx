@@ -75,7 +75,6 @@ const Banner = () => {
             </div>
 
             <div className="space-y-6">
-              {/* Stock Alert */}
               <div>
                 <p className="text-zinc-400 text-sm mb-3">
                   High demand today:
@@ -91,14 +90,13 @@ const Banner = () => {
                 </div>
               </div>
 
-              {/* Delivery Slots */}
               <div>
                 <div className="flex justify-between text-sm mb-2.5">
                   <span className="text-zinc-400">Delivery Slots for Eid</span>
                   <span className="font-medium text-emerald-400">81% Booked</span>
                 </div>
                 <div className="h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-                  <div className="bg-gradient-to-r from-emerald-400 to-amber-400 w-[81%] h-full rounded-full transition-all"></div>
+                  <div className="bg-linear-to-r from-emerald-400 to-amber-400 w-[81%] h-full rounded-full transition-all"></div>
                 </div>
                 <p className="text-xs text-zinc-500 mt-2">
                   Limited slots remaining for June 30 - July 10
@@ -106,7 +104,6 @@ const Banner = () => {
               </div>
             </div>
 
-            {/* Bottom Trust Line */}
             <div className="mt-8 pt-6 border-t border-zinc-700 text-xs text-zinc-500 flex items-center gap-2">
               <span><CircleCheckFill className="text-emerald-400" /></span>
               All animals are pre-screened by licensed veterinarians

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { FcGoogle } from 'react-icons/fc';
 
 export default function Signup() {
   const router = useRouter();
@@ -10,6 +11,7 @@ export default function Signup() {
     name: '',
     email: '',
     password: '',
+    phone: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,14 +26,13 @@ export default function Signup() {
         name: formData.name,
         email: formData.email,
         password: formData.password,
+        phone: formData.phone,
       });
 
       if (authError) {
         setError(authError.message || "Signup failed. Please try again.");
       } else {
         console.log("Signup successful:", data);
-        
-        // Force redirect to login after successful signup
         alert("Account created successfully! Please sign in.");
         router.push('/login');
       }
@@ -43,12 +44,24 @@ export default function Signup() {
     }
   };
 
+  const handleGoogleSignUp = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/login",  
+      });
+    } catch (err) {
+      setError("Google sign up failed. Please try again.");
+      console.error(err);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-950 via-emerald-900 to-zinc-950 flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-zinc-950 flex items-center justify-center px-6 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-white">Create Account</h1>
-          <p className="text-zinc-400 mt-3">Join QurbaniHat and book with confidence</p>
+          <p className="text-zinc-400 mt-3">Join QurbaniHat and Buy Your Qurbani Animal</p>
         </div>
 
         {error && (
@@ -83,7 +96,17 @@ export default function Signup() {
               />
             </div>
 
-            
+            <div>
+              <label className="block text-sm text-zinc-400 mb-2">Phone Number</label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full bg-zinc-950 border border-zinc-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-emerald-500 text-white"
+                placeholder="+880 1XXX-XXXXXX"
+              />
+            </div>
 
             <div>
               <label className="block text-sm text-zinc-400 mb-2">Password</label>
@@ -105,16 +128,27 @@ export default function Signup() {
               {loading ? "Creating Account..." : "Create Account"}
             </button>
           </div>
-
-          <div className="mt-6 text-center">
-            <p className="text-zinc-400">
-              Already have an account?{' '}
-              <Link href="/login" className="text-amber-400 hover:text-amber-300 font-medium">
-                Sign In
-              </Link>
-            </p>
-          </div>
         </form>
+
+        {/* Google Signup Button */}
+        <div className="mt-6">
+  <button
+    onClick={handleGoogleSignUp}
+    className="w-full flex items-center justify-center gap-3 bg-white text-gray-900 hover:bg-gray-100 font-medium py-4 rounded-2xl border border-gray-300 transition-all"
+  >
+    <FcGoogle className="w-6 h-6" />   {/* Clean Google Icon */}
+    Continue with Google
+  </button>
+</div>
+
+        <div className="mt-6 text-center">
+          <p className="text-zinc-400">
+            Already have an account?{' '}
+            <Link href="/login" className="text-amber-400 hover:text-amber-300 font-medium">
+              Sign In
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

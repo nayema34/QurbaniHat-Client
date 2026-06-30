@@ -1,31 +1,15 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';   // ← Add this
+import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchSession = async () => {
-      const { data } = await authClient.getSession();
-      setUser(data?.user || null);
-      setLoading(false);
-    };
-
-    fetchSession();
-
-    const unsubscribe = authClient.onSessionChange((session) => {
-      setUser(session?.user || null);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { data: session, isPending: loading } = authClient.useSession();
+  const user = session?.user;
 
   const closeMenu = () => setIsOpen(false);
 
@@ -35,10 +19,14 @@ const NavBar = () => {
   ];
 
   const handleLogout = async () => {
-    await authClient.signOut();
-    setUser(null);
-    closeMenu();
-    router.refresh();        // ← Added for better consistency
+    try {
+      await authClient.signOut();
+      closeMenu();
+      router.refresh();
+      router.push('/'); 
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
   };
 
   return (
@@ -85,7 +73,7 @@ const NavBar = () => {
                     </button>
                   </div>
                 ) : (
-                  <>
+                  <div className="flex items-center gap-6">
                     <Link
                       href="/login"
                       className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200"
@@ -99,7 +87,7 @@ const NavBar = () => {
                     >
                       Get Started
                     </Link>
-                  </>
+                  </div>
                 )}
               </>
             )}
@@ -124,7 +112,7 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu - No changes needed */}
+      {/* Mobile Menu */}
       <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} bg-white border-t`}>
         <div className="px-4 pt-3 pb-5 space-y-2">
           {navLinks.map((link) => (
@@ -138,38 +126,42 @@ const NavBar = () => {
             </Link>
           ))}
 
-          {user ? (
+          {!loading && (
             <>
-              <Link
-                href="/my-profile"
-                onClick={closeMenu}
-                className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
-              >
-                My Profile
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-red-600 hover:bg-red-50"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                href="/login"
-                onClick={closeMenu}
-                className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
-              >
-                Login
-              </Link>
-              <Link
-                href="/signup"
-                onClick={closeMenu}
-                className="block w-full text-center bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium mt-4 hover:bg-emerald-700"
-              >
-                Get Started
-              </Link>
+              {user ? (
+                <>
+                  <Link
+                    href="/my-profile"
+                    onClick={closeMenu}
+                    className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
+                  >
+                    My Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-red-600 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    onClick={closeMenu}
+                    className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-emerald-50 hover:text-emerald-600"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/signup"
+                    onClick={closeMenu}
+                    className="block w-full text-center bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium mt-4 hover:bg-emerald-700"
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
             </>
           )}
         </div>

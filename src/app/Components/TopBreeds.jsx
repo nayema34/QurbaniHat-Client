@@ -39,7 +39,7 @@ export default function TopBreeds() {
           <h2 className="text-4xl font-bold tracking-tight mt-2">Top Breeds This Season</h2>
         </div>
         <Link href="/animals" className="text-amber-400 hover:text-amber-300 font-medium flex items-center gap-2 mt-4 md:mt-0">
-          Browse All Breeds →
+          Browse All Breeds 
         </Link>
       </div>
 
@@ -54,7 +54,7 @@ export default function TopBreeds() {
                 width={500}
                 height={400}
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent h-2/3" />
+              <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/90 via-black/60 to-transparent h-2/3" />
             </div>
             
             <div className="absolute bottom-6 left-6 right-6">
